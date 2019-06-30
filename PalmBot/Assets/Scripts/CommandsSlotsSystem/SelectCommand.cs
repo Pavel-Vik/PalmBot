@@ -7,6 +7,6 @@ public class SelectCommand : MonoBehaviour
     public void Select()
     {
         Debug.Log("Selected command: " + command.name);
-        bool wasSelected = CommandsPanel.instance.Add(command);
+        bool wasSelected = CommandPanel.instance.Add(command);
     }
 }

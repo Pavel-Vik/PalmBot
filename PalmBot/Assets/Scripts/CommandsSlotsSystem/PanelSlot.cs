@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/* Sits on all InventorySlots. */
 public class PanelSlot : MonoBehaviour
 {
     public Image icon;
 
-    Command command;
+    Command command; // Current command in the slot
 
+    // Add command to the slot
     public void AddCommand (Command newCommand)
     {
         command = newCommand;
@@ -15,6 +17,7 @@ public class PanelSlot : MonoBehaviour
         icon.enabled = true;
     }
 
+    // Clear the slot
     public void ClearSlot()
     {
         command = null;
@@ -23,8 +26,9 @@ public class PanelSlot : MonoBehaviour
         icon.enabled = false;
     }
 
+    // Remove the command from the slot
     public void OnRemoveButton ()
     {
-        CommandsPanel.instance.Remove(command);
+        CommandPanel.instance.Remove(command);
     }
 }

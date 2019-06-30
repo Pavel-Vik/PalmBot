@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 
-public class CommandsUI : MonoBehaviour
+/* This object manages the CommandPanel UI. */
+public class CommandPanelUI : MonoBehaviour
 {
-    public Transform commandsParent;
+    public Transform commandsParent; // The parent object of all the commands
 
-    CommandsPanel commandsPanel;
+    CommandPanel commandsPanel; // Our current panel
 
     PanelSlot[] slots;
 
     void Start()
     {
-        commandsPanel = CommandsPanel.instance;
+        commandsPanel = CommandPanel.instance;
         commandsPanel.onCommandChangedCallback += UpdateUI;
 
         slots = commandsParent.GetComponentsInChildren<PanelSlot>();
@@ -22,6 +23,10 @@ public class CommandsUI : MonoBehaviour
         
     }
 
+    // Update the ComandPanel UI by:
+    //		- Adding commands
+    //		- Clearing empty slots
+    // This is called using a delegate on the CommandPanel.
     void UpdateUI ()
     {
         for (int i = 0; i < slots.Length; i++)

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandsPanel : MonoBehaviour
+public class CommandPanel : MonoBehaviour
 {
     #region Singelton
 
-    public static CommandsPanel instance;
+    public static CommandPanel instance;
 
     void Awake()
     {
         if (instance != null)
         {
-            Debug.LogWarning("More than one instance of CommandsPannel found!");
+            Debug.LogWarning("More than one instance of CommandPannel found!");
             return;
         }
         instance = this;
@@ -23,10 +23,12 @@ public class CommandsPanel : MonoBehaviour
     public delegate void OnCommandChanged();
     public OnCommandChanged onCommandChangedCallback;
 
-    public int space = 12;
+    public int space = 12; // Max amount of commands in the panel
 
+    // Our current list of items in the ComandPanel
     public List<Command> commands = new List<Command>();
 
+    // Add a new command if enough room
     public bool Add (Command command)
     {
         if (!command.isDefaultCommand)
@@ -44,6 +46,7 @@ public class CommandsPanel : MonoBehaviour
         return true;
     }
 
+    // Remove a command
     public void Remove (Command command)
     {
         commands.Remove(command);
