@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Palm
+  - Green
+  - Collider
   layers:
   - Default
   - TransparentFX
