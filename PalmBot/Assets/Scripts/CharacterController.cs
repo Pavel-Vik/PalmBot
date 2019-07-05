@@ -7,11 +7,13 @@ public class CharacterController : MonoBehaviour
     public GameObject gameController;
     public GameObject tree;
 
+    public Animator animator;
+
         // Movement vars
     public float movementSpeed = 1f;
     public float xStep = -0.5f;
     public float yStep = 0.25f;
-    public Vector2 target;
+    public Vector3 target;
 
     Rigidbody2D rbody;
     public bool isReadyToPlant = false;
@@ -32,11 +34,17 @@ public class CharacterController : MonoBehaviour
             Move();
 
         transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
+
+            // Conditions for animation
+        if (transform.position != target)
+            animator.SetBool("isWalking", true);
+        else
+            animator.SetBool("isWalking", false);
     }
 
     public void Move()
     {
-        target = new Vector2(target.x + xStep, target.y + yStep);
+        target = new Vector3(target.x + xStep, target.y + yStep);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
