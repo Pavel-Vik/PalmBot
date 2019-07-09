@@ -11,19 +11,22 @@ public class GameController : MonoBehaviour
 
         // Game Objects
     public GameObject tree;
-    public GameObject character;
+    public GameObject bot;
+    private BotRotation botRotationScript;
 
     public static bool isCommandDone = false;
     public bool plantTreeCommanded = false; // Var for tree planting
-    private Vector2 firstPlayerPos;
+    private Vector2 firstBotPos;
+    private int firstBotDirection;
 
     // Start is called before the first frame update
     void Start()
     {
         commandsPanel = CommandPanel.instance; // List of our commands
 
-        // CharacterMove.cs
-        firstPlayerPos = character.GetComponent<Transform>().position;
+        firstBotPos = bot.GetComponent<Transform>().position;
+        firstBotDirection = bot.GetComponent<BotRotation>().botDirection;
+        botRotationScript = bot.GetComponent<BotRotation>();
     }
 
         // RETRY button
@@ -31,8 +34,10 @@ public class GameController : MonoBehaviour
     {
 
             //Reset position of character
-        character.transform.position = firstPlayerPos;
-        character.GetComponent<CharacterController>().target = firstPlayerPos;
+        bot.transform.position = firstBotPos;
+        bot.GetComponent<BotController>().target = firstBotPos;
+        bot.GetComponent<BotRotation>().botDirection = firstBotDirection;
+        bot.GetComponent<BotRotation>().SetDirectionOfBotMovement();
 
         plantTreeCommanded = false; // Reset command
 
@@ -59,7 +64,7 @@ public class GameController : MonoBehaviour
             // GO COMMAND
             if (commandsPanel.commands[i].name == "Go")
             {
-                character.GetComponent<CharacterController>().Move();
+                bot.GetComponent<BotController>().Move();
                 isCommandDone = false;
             }
             // PLANT COMMAND
@@ -74,6 +79,7 @@ public class GameController : MonoBehaviour
             {
                 //Call method to rotate
                 isCommandDone = false;
+                botRotationScript.Rotate("left");
                 Debug.Log("Rotate Left method is called");
             }
 
@@ -81,6 +87,7 @@ public class GameController : MonoBehaviour
             if (commandsPanel.commands[i].name == "RotateRight")
             {
                 isCommandDone = false;
+                botRotationScript.Rotate("right");
                 Debug.Log("Rotate Right method is called");
             }
         }
@@ -99,7 +106,7 @@ public class GameController : MonoBehaviour
     public void Plant()
     {
         Debug.Log("Plant function");
-        if (CharacterController.isPlaceForTree == true)
-            Instantiate(tree, character.transform.position, Quaternion.identity);
+        if (BotController.isPlaceForTree == true)
+            Instantiate(tree, bot.transform.position, Quaternion.identity);
     }
 }

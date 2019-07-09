@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class BotController : MonoBehaviour
 {       // Game objects
     public GameObject gameController;
     public GameObject tree;
@@ -21,13 +21,14 @@ public class CharacterController : MonoBehaviour
     public bool isDone = false;
     public static bool isPlaceForTree = false;
 
-    private Vector2 finishCharacterPos;
+    private Vector2 finishBotPos;
 
     private void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
         target = transform.position;
-        finishCharacterPos = new Vector2(2, 4);
+        finishBotPos = new Vector2(2, 4);
+        //gameObject.GetComponent<BotRotation>().botDirection;
     }
 
     // Update is called once per frame
