@@ -10,14 +10,12 @@ public class GameController : MonoBehaviour
     //public int characterDirection; // Where the character look at
 
         // Game Objects
-    //public GameObject tree;
+    public GameObject tree;
     public GameObject character;
 
+    public static bool isCommandDone = false;
     public bool plantTreeCommanded = false; // Var for tree planting
     private Vector2 firstPlayerPos;
-
-    //Kostyli
-    private int step = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +29,6 @@ public class GameController : MonoBehaviour
         // RETRY button
     public void RetryPressed()
     {
-        step = 0; //KOSTYL!!!
 
             //Reset position of character
         character.transform.position = firstPlayerPos;
@@ -47,29 +44,47 @@ public class GameController : MonoBehaviour
         // PLAY button
     public void PlayPressed()
     {
-            //Read commands
+        StartCoroutine(WaitForCommandFinish());
+    }
+    
+    IEnumerator WaitForCommandFinish()
+    {
+        //Read commands
         for (int i = 0; i < commandsPanel.commands.Count; i++)
         {
+            yield return new WaitUntil(IsCommandFinished); // Wait until past command is finished and then go to next iteration
+
             //Debug.Log("List:" + commandsPanel.commands[i]);
+
+            // GO COMMAND
             if (commandsPanel.commands[i].name == "Go")
             {
-                step++;
                 character.GetComponent<CharacterController>().Move();
+                isCommandDone = false;
             }
+            // PLANT COMMAND
             if (commandsPanel.commands[i].name == "Plant")
             {
-                if (step == 2) // KOSTYL!!!
-                    Plant();
+                Plant();
+                isCommandDone = false;
             }
         }
+        Debug.Log("All commands are finished");
+    }
+
+    public bool IsCommandFinished()
+    {
+        if (isCommandDone == true)
+            return true;
+        else
+            return false;
     }
 
         // Plant a tree
     public void Plant()
     {
         Debug.Log("Plant function");
-        plantTreeCommanded = true;
-        //if (character.GetComponent<CharacterController>().isReadyToPlant == true)
-        //Instantiate(tree);
+
+        Instantiate(tree); //!!!!!!!!!!   SET POSITION !!!!!!!!!!!!!!
     }
 }

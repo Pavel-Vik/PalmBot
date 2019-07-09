@@ -16,6 +16,9 @@ public class CharacterController : MonoBehaviour
     public Vector3 target;
 
     Rigidbody2D rbody;
+
+        // Boolean vars
+    public bool isDone = false;
     public bool isReadyToPlant = false;
 
     private Vector2 finishCharacterPos;
@@ -35,11 +38,16 @@ public class CharacterController : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
 
-            // Conditions for animation
+        // Conditions for animation
         if (transform.position != target)
+        {
             animator.SetBool("isWalking", true);
+        }
         else
+        {
             animator.SetBool("isWalking", false);
+            GameController.isCommandDone = true;
+        }
     }
 
     public void Move()
@@ -52,8 +60,8 @@ public class CharacterController : MonoBehaviour
         if (collision.tag == "Green")
         {
             Debug.Log("Green Zone entered");
-            if (gameController.GetComponent<GameController>().plantTreeCommanded == true)
-                Instantiate(tree);
+            //if (gameController.GetComponent<GameController>().plantTreeCommanded == true)
+                //Instantiate(tree);
         }
         if (collision.tag == "Collider")
         {
