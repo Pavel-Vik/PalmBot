@@ -19,7 +19,7 @@ public class CharacterController : MonoBehaviour
 
         // Boolean vars
     public bool isDone = false;
-    public bool isReadyToPlant = false;
+    public static bool isPlaceForTree = false;
 
     private Vector2 finishCharacterPos;
 
@@ -60,6 +60,7 @@ public class CharacterController : MonoBehaviour
         if (collision.tag == "Green")
         {
             Debug.Log("Green Zone entered");
+            isPlaceForTree = true;
             //if (gameController.GetComponent<GameController>().plantTreeCommanded == true)
                 //Instantiate(tree);
         }
@@ -72,6 +73,7 @@ public class CharacterController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isReadyToPlant = false;
+        isPlaceForTree = false;
+        //isReadyToPlant = false;
     }
 }

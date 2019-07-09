@@ -68,6 +68,21 @@ public class GameController : MonoBehaviour
                 Plant();
                 isCommandDone = false;
             }
+
+            // ROTATE LEFT command
+            if (commandsPanel.commands[i].name == "RotateLeft")
+            {
+                //Call method to rotate
+                isCommandDone = false;
+                Debug.Log("Rotate Left method is called");
+            }
+
+            // ROTATE RIGHT command
+            if (commandsPanel.commands[i].name == "RotateRight")
+            {
+                isCommandDone = false;
+                Debug.Log("Rotate Right method is called");
+            }
         }
         Debug.Log("All commands are finished");
     }
@@ -84,7 +99,7 @@ public class GameController : MonoBehaviour
     public void Plant()
     {
         Debug.Log("Plant function");
-
-        Instantiate(tree); //!!!!!!!!!!   SET POSITION !!!!!!!!!!!!!!
+        if (CharacterController.isPlaceForTree == true)
+            Instantiate(tree, character.transform.position, Quaternion.identity);
     }
 }
