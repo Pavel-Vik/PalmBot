@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BotController : MonoBehaviour
-{       // Game objects
+{   
+    [Header("Game Objects")]
     public GameObject gameController;
     public GameObject tree;
-
     public Animator animator;
+    
 
-        // Movement vars
+    // Movement vars
+    [Header("Movement Values")]
     public float movementSpeed = 1f;
     public float xStep = -0.5f;
     public float yStep = 0.25f;
+    [HideInInspector]
     public Vector3 target;
 
-    Rigidbody2D rbody;
-
+    [Space]
         // Boolean vars
     public bool isDone = false;
     public static bool isPlaceForTree = false;
 
     private Vector2 finishBotPos;
+    Rigidbody2D rbody;
 
     private void Start()
     {
@@ -34,15 +37,16 @@ public class BotController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //CLEAN IT=========
         if (Input.GetKeyDown(KeyCode.Space))
             Move();
+        //==================
 
-        transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
-
-        // Conditions for animation
+        // Conditions for animation and movement
         if (transform.position != target)
         {
             animator.SetBool("isWalking", true);
+            transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
         }
         else
         {

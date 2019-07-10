@@ -8,11 +8,14 @@ public class GameController : MonoBehaviour
     CommandPanel commandsPanel; // Our current panel
 
     //public int characterDirection; // Where the character look at
-
+    public float delay = 0.1f;
         // Game Objects
     public GameObject tree;
     public GameObject bot;
+
+    // OTHER SRIPTS
     private BotRotation botRotationScript;
+    private BotJumping botJumpingScript;
 
     public static bool isCommandDone = false;
     public bool plantTreeCommanded = false; // Var for tree planting
@@ -26,13 +29,15 @@ public class GameController : MonoBehaviour
 
         firstBotPos = bot.GetComponent<Transform>().position;
         firstBotDirection = bot.GetComponent<BotRotation>().botDirection;
+
+        // Take other gameobject's scripts
         botRotationScript = bot.GetComponent<BotRotation>();
+        botJumpingScript = bot.GetComponent<BotJumping>();
     }
 
         // RETRY button
     public void RetryPressed()
     {
-
             //Reset position of character
         bot.transform.position = firstBotPos;
         bot.GetComponent<BotController>().target = firstBotPos;
@@ -51,14 +56,14 @@ public class GameController : MonoBehaviour
     {
         StartCoroutine(WaitForCommandFinish());
     }
-    
+
+    #region Commands
     IEnumerator WaitForCommandFinish()
     {
         //Read commands
         for (int i = 0; i < commandsPanel.commands.Count; i++)
         {
             yield return new WaitUntil(IsCommandFinished); // Wait until past command is finished and then go to next iteration
-
             //Debug.Log("List:" + commandsPanel.commands[i]);
 
             // GO COMMAND
@@ -70,6 +75,7 @@ public class GameController : MonoBehaviour
             // PLANT COMMAND
             if (commandsPanel.commands[i].name == "Plant")
             {
+                yield return new WaitForSeconds(delay);
                 Plant();
                 isCommandDone = false;
             }
@@ -81,6 +87,7 @@ public class GameController : MonoBehaviour
                 isCommandDone = false;
                 botRotationScript.Rotate("left");
                 Debug.Log("Rotate Left method is called");
+                yield return new WaitForSeconds(delay);
             }
 
             // ROTATE RIGHT command
@@ -89,16 +96,27 @@ public class GameController : MonoBehaviour
                 isCommandDone = false;
                 botRotationScript.Rotate("right");
                 Debug.Log("Rotate Right method is called");
+                yield return new WaitForSeconds(delay);
+            }
+
+            // JUMP command
+            if (commandsPanel.commands[i].name == "Jump")
+            {
+                isCommandDone = false;
+                botJumpingScript.Jump();
+                Debug.Log("Jump command");
+                //yield return new WaitForSeconds(delay);
             }
         }
         Debug.Log("All commands are finished");
     }
+    #endregion
 
     public bool IsCommandFinished()
     {
         if (isCommandDone == true)
             return true;
-        else
+        else 
             return false;
     }
 

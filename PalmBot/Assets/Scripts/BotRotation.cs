@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class BotRotation : MonoBehaviour
 {
-    public int botDirection = 0; //0 - SE, 1 - SW, 2 - NW, 3 - NE
+    [Tooltip("0 - DownRight, 1 - DownLeft, 2 - UpLeft, 3 - UpRight")]
+    [Range(0, 3)]
+    public int botDirection = 0; //0 - DownRight, 1 - DownLeft, 2 - UpLeft, 3 - UpRight
+    [Tooltip("How much time this command takes")]
+    //public float delay = 1f;
+
+    //public Sprite DownRight;
+    //public Sprite UpLeft;
 
     private float xStep, yStep;
 
@@ -18,22 +25,22 @@ public class BotRotation : MonoBehaviour
 
     public void SetDirectionOfBotMovement()
     {
-        if (botDirection == 0) // SE
+        if (botDirection == 0) // DownRight
         {
             xStep = Mathf.Abs(xStep);
             yStep = Mathf.Abs(yStep) * -1f;
         }
-        else if (botDirection == 1) // SW
+        else if (botDirection == 1) // DownLeft
         {
             xStep = Mathf.Abs(xStep) * -1f;
             yStep = Mathf.Abs(yStep) * -1f;
         }
-        else if (botDirection == 2) // NW
+        else if (botDirection == 2) // UpLeft
         {
             xStep = Mathf.Abs(xStep) * -1f;
             yStep = Mathf.Abs(yStep);
         }
-        else if (botDirection == 3) // NE
+        else if (botDirection == 3) // UpRight
         {
             xStep = Mathf.Abs(xStep);
             yStep = Mathf.Abs(yStep);
@@ -69,5 +76,12 @@ public class BotRotation : MonoBehaviour
         GameController.isCommandDone = true;
 
         SetDirectionOfBotMovement();
+        //StartCoroutine(Delay());
     }
+
+    //IEnumerator Delay()
+    //{
+    //    yield return new WaitForSeconds(delay);
+    //    GameController.isCommandDone = true;
+    //}
 }
