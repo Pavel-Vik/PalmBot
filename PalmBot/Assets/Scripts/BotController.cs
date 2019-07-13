@@ -15,7 +15,7 @@ public class BotController : MonoBehaviour
     public float movementSpeed = 1f;
     public float xStep = -0.5f;
     public float yStep = 0.25f;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3 target;
 
     [Space]
@@ -38,14 +38,14 @@ public class BotController : MonoBehaviour
     void FixedUpdate()
     {
         //CLEAN IT=========
-        if (Input.GetKeyDown(KeyCode.Space))
-            Move();
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    Move();
         //==================
 
         // Conditions for animation and movement
         if (transform.position != target)
         {
-            animator.SetBool("isWalking", true);
+            //animator.SetBool("isWalking", true);
             transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
         }
         else
@@ -58,6 +58,7 @@ public class BotController : MonoBehaviour
     public void Move()
     {
         target = new Vector3(target.x + xStep, target.y + yStep);
+        animator.SetBool("isWalking", true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

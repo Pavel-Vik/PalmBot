@@ -18,7 +18,7 @@ public class BotAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        botDirection = gameObject.GetComponent<BotRotation>().botDirection;
+        botDirection = gameObject.GetComponentInParent<BotRotation>().botDirection;
 
         if (botDirection == 0) // DownRight
         {

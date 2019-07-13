@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 
     //public int characterDirection; // Where the character look at
     public float delay = 0.1f;
+    public float jumpDelay = 0.5f;
         // Game Objects
     public GameObject tree;
     public GameObject bot;
@@ -105,6 +106,7 @@ public class GameController : MonoBehaviour
                 isCommandDone = false;
                 botJumpingScript.Jump();
                 Debug.Log("Jump command");
+                yield return new WaitForSeconds(jumpDelay);
                 //yield return new WaitForSeconds(delay);
             }
         }

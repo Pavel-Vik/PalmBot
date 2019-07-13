@@ -8,14 +8,16 @@ public class BotJumping : MonoBehaviour
     private float xStep, yStep, movementSpeed;
     private bool isJumping = false;
 
-    private Animator anim;
+    public Animator anim;
+    public GameObject trigger;
+    public SpriteRenderer botRenderer;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
+        //anim = gameObject.GetComponent<Animator>();
         movementSpeed = gameObject.GetComponent<BotController>().movementSpeed;
     }
 
@@ -31,10 +33,27 @@ public class BotJumping : MonoBehaviour
 
     public void Jump()
     {
-        anim.SetBool("isJumping", true);
+        anim.SetTrigger("Jumping");
+        Vector2 botStep = new Vector2(gameObject.GetComponent<BotController>().xStep, gameObject.GetComponent<BotController>().yStep);
+        float dist = 0.5f;
+        RaycastHit2D ray = Physics2D.Raycast(gameObject.transform.position, botStep, dist);
+
+        Vector3 targ = gameObject.GetComponent<BotController>().target;
+
+        if (ray.collider != null)
+        {
+            //trigger.GetComponent<Transform>().position = botDirection;
+            gameObject.GetComponent<BotController>().target = new Vector3(targ.x + botStep.x * 1.6f, targ.y + botStep.y * 1.6f);
+            botRenderer.sortingOrder++;
+
+            Debug.Log("Raycast collider name: " + ray.collider.name);
+            Debug.Log("Raycast collider dist: " + ray.distance);
+            //if we have a block before and sorting layer +1 then we set target
+        }
+
         //xStep = gameObject.GetComponent<BotController>().xStep;
         //yStep = gameObject.GetComponent<BotController>().yStep;
-
+        //anim.SetBool("isJumping", false);
         //target = new Vector3(target.x + xStep, target.y + yStep);
         //isJumping = true;
     }
