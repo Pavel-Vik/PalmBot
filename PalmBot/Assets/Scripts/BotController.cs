@@ -8,13 +8,15 @@ public class BotController : MonoBehaviour
     public GameObject gameController;
     public GameObject tree;
     public Animator animator;
-    
+    public SpriteRenderer botRenderer;
+
 
     // Movement vars
     [Header("Movement Values")]
     public float movementSpeed = 1f;
     public float xStep = -0.5f;
     public float yStep = 0.25f;
+    public float rayDist;
     //[HideInInspector]
     public Vector3 target;
 
@@ -57,8 +59,22 @@ public class BotController : MonoBehaviour
 
     public void Move()
     {
-        target = new Vector3(target.x + xStep, target.y + yStep);
+        //target = new Vector3(target.x + xStep, target.y + yStep);
         animator.SetBool("isWalking", true);
+
+        
+        RaycastHit2D ray = Physics2D.Raycast(gameObject.transform.position, new Vector2(xStep, yStep), rayDist, botRenderer.sortingOrder);
+        if (ray.collider != null)
+        {
+            Debug.Log("Walk ray name " + ray.collider.name);
+            target = new Vector3(target.x + xStep, target.y + yStep);
+        }
+        else
+        {
+            animator.SetBool("isWalking", true);
+            //animator.SetTrigger("WalkingTrigger");
+            StartCoroutine(Delay());
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,5 +97,10 @@ public class BotController : MonoBehaviour
     {
         isPlaceForTree = false;
         //isReadyToPlant = false;
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(10f);
     }
 }

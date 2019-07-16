@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
         // Game Objects
     public GameObject tree;
     public GameObject bot;
+    public GameObject botGraphic;
 
     // OTHER SRIPTS
     private BotRotation botRotationScript;
@@ -22,6 +23,7 @@ public class GameController : MonoBehaviour
     public bool plantTreeCommanded = false; // Var for tree planting
     private Vector2 firstBotPos;
     private int firstBotDirection;
+    private int firstBotLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class GameController : MonoBehaviour
 
         firstBotPos = bot.GetComponent<Transform>().position;
         firstBotDirection = bot.GetComponent<BotRotation>().botDirection;
+        firstBotLayer = botGraphic.GetComponent<SpriteRenderer>().sortingOrder;
 
         // Take other gameobject's scripts
         botRotationScript = bot.GetComponent<BotRotation>();
@@ -44,6 +47,7 @@ public class GameController : MonoBehaviour
         bot.GetComponent<BotController>().target = firstBotPos;
         bot.GetComponent<BotRotation>().botDirection = firstBotDirection;
         bot.GetComponent<BotRotation>().SetDirectionOfBotMovement();
+        botGraphic.GetComponent<SpriteRenderer>().sortingOrder = firstBotLayer;
 
         plantTreeCommanded = false; // Reset command
 

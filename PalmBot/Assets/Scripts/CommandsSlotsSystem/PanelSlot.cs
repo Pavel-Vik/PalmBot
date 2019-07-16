@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PanelSlot : MonoBehaviour
 {
     public Image icon;
+    public int slotNumber;
 
     Command command; // Current command in the slot
 
@@ -29,6 +30,11 @@ public class PanelSlot : MonoBehaviour
     // Remove the command from the slot
     public void OnRemoveButton ()
     {
-        CommandPanel.instance.Remove(command);
+        //if (CommandPanel.instance.panelNumber == 1)
+            CommandPanel.instance.Remove(slotNumber);
+
+        //else if (CommandPanel.instance.panelNumber == 2)
+        //    CommandPanel.instanceProc1.Remove(slotNumber);
     }
+
 }
