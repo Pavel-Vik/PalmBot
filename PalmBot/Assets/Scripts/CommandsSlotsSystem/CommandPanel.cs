@@ -111,23 +111,23 @@ public class CommandPanel : MonoBehaviour
         if (panelNumber == 1)
         {
             selectedPanel = 1;
-            //gameObject.GetComponent<Image>().color = selectedColor;
-            //Proc1Panel.GetComponent<Image>().color = unselectedColor;
-            //Proc2Panel.GetComponent<Image>().color = unselectedColor;
+            gameObject.GetComponent<Image>().color = selectedColor;
+            Proc1Panel.GetComponent<Image>().color = unselectedColor;
+            Proc2Panel.GetComponent<Image>().color = unselectedColor;
         }
         else if (panelNumber == 2)
         {
             selectedPanel = 2;
-            //gameObject.GetComponent<Image>().color = unselectedColor;
-            //Proc1Panel.GetComponent<Image>().color = selectedColor;
-            //Proc2Panel.GetComponent<Image>().color = unselectedColor;
+            gameObject.GetComponent<Image>().color = unselectedColor;
+            Proc1Panel.GetComponent<Image>().color = selectedColor;
+            Proc2Panel.GetComponent<Image>().color = unselectedColor;
         }
         else if (panelNumber == 3)
         {
             selectedPanel = 3;
-            //gameObject.GetComponent<Image>().color = unselectedColor;
-            //Proc1Panel.GetComponent<Image>().color = unselectedColor;
-            //Proc2Panel.GetComponent<Image>().color = selectedColor;
+            gameObject.GetComponent<Image>().color = unselectedColor;
+            Proc1Panel.GetComponent<Image>().color = unselectedColor;
+            Proc2Panel.GetComponent<Image>().color = selectedColor;
         }
     }
 }

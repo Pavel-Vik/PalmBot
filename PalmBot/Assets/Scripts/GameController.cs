@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour
         bot.GetComponent<BotRotation>().botDirection = firstBotDirection;
         bot.GetComponent<BotRotation>().SetDirectionOfBotMovement();
         botGraphic.GetComponent<SpriteRenderer>().sortingOrder = firstBotLayer;
+        StopAllCoroutines();
 
         plantTreeCommanded = false; // Reset command
 
@@ -59,26 +60,26 @@ public class GameController : MonoBehaviour
         // PLAY button
     public void PlayPressed()
     {
-        StartCoroutine(WaitForCommandFinish());
+        StartCoroutine(ReadCommands(commandsPanel.commands));
     }
 
     #region Commands
-    IEnumerator WaitForCommandFinish()
+    IEnumerator ReadCommands(List<Command> commands)
     {
         //Read commands
-        for (int i = 0; i < commandsPanel.commands.Count; i++)
+        for (int i = 0; i < commands.Count; i++)
         {
             yield return new WaitUntil(IsCommandFinished); // Wait until past command is finished and then go to next iteration
             //Debug.Log("List:" + commandsPanel.commands[i]);
 
             // GO COMMAND
-            if (commandsPanel.commands[i].name == "Go")
+            if (commands[i].name == "Go")
             {
                 bot.GetComponent<BotController>().Move();
                 isCommandDone = false;
             }
             // PLANT COMMAND
-            if (commandsPanel.commands[i].name == "Plant")
+            if (commands[i].name == "Plant")
             {
                 yield return new WaitForSeconds(delay);
                 Plant();
@@ -86,7 +87,7 @@ public class GameController : MonoBehaviour
             }
 
             // ROTATE LEFT command
-            if (commandsPanel.commands[i].name == "RotateLeft")
+            if (commands[i].name == "RotateLeft")
             {
                 //Call method to rotate
                 isCommandDone = false;
@@ -96,7 +97,7 @@ public class GameController : MonoBehaviour
             }
 
             // ROTATE RIGHT command
-            if (commandsPanel.commands[i].name == "RotateRight")
+            if (commands[i].name == "RotateRight")
             {
                 isCommandDone = false;
                 botRotationScript.Rotate("right");
@@ -105,13 +106,31 @@ public class GameController : MonoBehaviour
             }
 
             // JUMP command
-            if (commandsPanel.commands[i].name == "Jump")
+            if (commands[i].name == "Jump")
             {
                 isCommandDone = false;
                 botJumpingScript.Jump();
                 Debug.Log("Jump command");
                 yield return new WaitForSeconds(jumpDelay);
                 //yield return new WaitForSeconds(delay);
+            }
+
+            // PROC1 command
+            if (commands[i].name == "PROC1")
+            {
+                isCommandDone = false;
+                Debug.Log("PROC1 is commanded");
+                StartCoroutine(ReadCommands(commandsPanel.commandsProc1));
+                break;
+            }
+
+            // PROC2 command
+            if (commands[i].name == "PROC2")
+            {
+                isCommandDone = false;
+                Debug.Log("PROC2 is commanded");
+                StartCoroutine(ReadCommands(commandsPanel.commandsProc2));
+                break;
             }
         }
         Debug.Log("All commands are finished");

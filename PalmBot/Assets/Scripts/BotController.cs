@@ -62,19 +62,32 @@ public class BotController : MonoBehaviour
         //target = new Vector3(target.x + xStep, target.y + yStep);
         animator.SetBool("isWalking", true);
 
-        
-        RaycastHit2D ray = Physics2D.Raycast(gameObject.transform.position, new Vector2(xStep, yStep), rayDist, botRenderer.sortingOrder);
-        if (ray.collider != null)
-        {
-            Debug.Log("Walk ray name " + ray.collider.name);
+        //RaycastHit2D [] rays; 
+        //rays = Physics2D.RaycastAll(gameObject.transform.position, new Vector2(xStep, yStep), rayDist);
+
+        //Debug.Log("COUNT OF RAYCASTS: " + rays.Length);
+        //for (int i = 0; i < rays.Length; i++)
+        //{
+        //    RaycastHit2D hit = rays[i];
+        //    Debug.Log("MOVE RAYS: " + hit.collider.name);
+        //}
+
+        //RaycastHit2D ray1 = Physics2D.Raycast(new Vector2(gameObject.transform.position.x - xStep, gameObject.transform.position.y + yStep), new Vector2(xStep, yStep), rayDist, botRenderer.sortingOrder);
+        //RaycastHit2D ray2 = Physics2D.Raycast(gameObject.transform.position, new Vector2(xStep, yStep), rayDist, botRenderer.sortingOrder);
+
+        //Debug.Log("Walk ray1 " + ray1.collider.name);
+        //Debug.Log("Walk ray2 " + ray2.collider.name);
+
+        //if (ray2.collider != null)
+        //{
             target = new Vector3(target.x + xStep, target.y + yStep);
-        }
-        else
-        {
+        //}
+        //else
+        //{
             animator.SetBool("isWalking", true);
             //animator.SetTrigger("WalkingTrigger");
             StartCoroutine(Delay());
-        }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
