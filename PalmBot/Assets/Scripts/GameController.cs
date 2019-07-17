@@ -25,6 +25,9 @@ public class GameController : MonoBehaviour
     private int firstBotDirection;
     private int firstBotLayer;
 
+    private int finishedMainCommands = 0;
+    private IEnumerator mainCoroutine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +52,9 @@ public class GameController : MonoBehaviour
         bot.GetComponent<BotRotation>().SetDirectionOfBotMovement();
         botGraphic.GetComponent<SpriteRenderer>().sortingOrder = firstBotLayer;
         StopAllCoroutines();
+        botGraphic.GetComponent<Animator>().Rebind();
+        bot.GetComponent<BotJumping>().jumped = false;
+        BotController.isJump = false;
 
         plantTreeCommanded = false; // Reset command
 
@@ -60,14 +66,16 @@ public class GameController : MonoBehaviour
         // PLAY button
     public void PlayPressed()
     {
-        StartCoroutine(ReadCommands(commandsPanel.commands));
+        finishedMainCommands = 0;
+        mainCoroutine = ReadCommands(commandsPanel.commands, true, 0);
+        StartCoroutine(mainCoroutine);
     }
 
     #region Commands
-    IEnumerator ReadCommands(List<Command> commands)
+    IEnumerator ReadCommands(List<Command> commands, bool isMain, int startIndex)
     {
         //Read commands
-        for (int i = 0; i < commands.Count; i++)
+        for (int i = startIndex; i < commands.Count; i++)
         {
             yield return new WaitUntil(IsCommandFinished); // Wait until past command is finished and then go to next iteration
             //Debug.Log("List:" + commandsPanel.commands[i]);
@@ -111,6 +119,7 @@ public class GameController : MonoBehaviour
                 isCommandDone = false;
                 botJumpingScript.Jump();
                 Debug.Log("Jump command");
+                //BotController.isJump = true;
                 yield return new WaitForSeconds(jumpDelay);
                 //yield return new WaitForSeconds(delay);
             }
@@ -120,7 +129,11 @@ public class GameController : MonoBehaviour
             {
                 isCommandDone = false;
                 Debug.Log("PROC1 is commanded");
-                StartCoroutine(ReadCommands(commandsPanel.commandsProc1));
+                yield return new WaitForSeconds(delay);
+                StartCoroutine(ReadCommands(commandsPanel.commandsProc1, false, 0));
+                if (isMain)
+                    finishedMainCommands++;
+                StopCoroutine(mainCoroutine);
                 break;
             }
 
@@ -129,11 +142,29 @@ public class GameController : MonoBehaviour
             {
                 isCommandDone = false;
                 Debug.Log("PROC2 is commanded");
-                StartCoroutine(ReadCommands(commandsPanel.commandsProc2));
+                yield return new WaitForSeconds(delay);
+                StartCoroutine(ReadCommands(commandsPanel.commandsProc2, false, 0));
+                if (isMain)
+                    finishedMainCommands++;
+                StopCoroutine(mainCoroutine);
                 break;
             }
+
+            if (isMain == true)
+                finishedMainCommands++;
         }
-        Debug.Log("All commands are finished");
+
+        Debug.Log("finishedMainCommands = " + finishedMainCommands + "/ " + commandsPanel.commands.Count);
+        
+            if (finishedMainCommands < commandsPanel.commands.Count)
+            {
+
+                yield return new WaitForSeconds(delay);
+                //StartCoroutine(ReadCommands(commandsPanel.commands, true, finishedMainCommands));
+                mainCoroutine = ReadCommands(commandsPanel.commands, true, finishedMainCommands);
+                StartCoroutine(mainCoroutine);
+        }
+            Debug.Log("All commands are finished");
     }
     #endregion
 
