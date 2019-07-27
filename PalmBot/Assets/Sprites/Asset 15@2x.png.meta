@@ -1,7 +1,9 @@
 fileFormatVersion: 2
-guid: e07b5c8ba0379314cb5b784f3911c9e9
+guid: 4e423c594d9709e44ba4d30461f12983
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Asset 15@2x_0
+    21300002: Asset 15@2x_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -40,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,11 +117,51 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Asset 15@2x_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10
+        width: 149
+        height: 340
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 874cb24c119ffa64385bc2ee827d533e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Asset 15@2x_1
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 0
+        width: 149
+        height: 340
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d77137f9ed96cb14aabb4af44b27bf48
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 344979ce8bb442341ad43724deec2009
+    spriteID: 72a1e7cf9decf6042bd2bef907e5d896
     vertices: []
     indices: 
     edges: []
