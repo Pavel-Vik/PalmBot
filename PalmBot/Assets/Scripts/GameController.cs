@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
 public class GameController : MonoBehaviour
@@ -21,7 +22,7 @@ public class GameController : MonoBehaviour
 
     public static bool isCommandDone = false;
     public bool plantTreeCommanded = false; // Var for tree planting
-    private Vector2 firstBotPos;
+    private Vector3 firstBotPos;
     private int firstBotDirection;
     private int firstBotLayer;
 
@@ -35,7 +36,7 @@ public class GameController : MonoBehaviour
 
         firstBotPos = bot.GetComponent<Transform>().position;
         firstBotDirection = bot.GetComponent<BotRotation>().botDirection;
-        firstBotLayer = botGraphic.GetComponent<SpriteRenderer>().sortingOrder;
+        firstBotLayer = botGraphic.GetComponent<SortingGroup>().sortingOrder;
 
         // Take other gameobject's scripts
         botRotationScript = bot.GetComponent<BotRotation>();
@@ -50,7 +51,7 @@ public class GameController : MonoBehaviour
         bot.GetComponent<BotController>().target = firstBotPos;
         bot.GetComponent<BotRotation>().botDirection = firstBotDirection;
         bot.GetComponent<BotRotation>().SetDirectionOfBotMovement();
-        botGraphic.GetComponent<SpriteRenderer>().sortingOrder = firstBotLayer;
+        botGraphic.GetComponent<SortingGroup>().sortingOrder = firstBotLayer;
         StopAllCoroutines();
         botGraphic.GetComponent<Animator>().Rebind();
         bot.GetComponent<BotJumping>().jumped = false;

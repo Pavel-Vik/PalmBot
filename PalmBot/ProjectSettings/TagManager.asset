@@ -50,3 +50,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Palm
+    uniqueID: 1288430321
+    locked: 0

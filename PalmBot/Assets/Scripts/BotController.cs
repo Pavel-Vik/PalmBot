@@ -30,7 +30,7 @@ public class BotController : MonoBehaviour
     public static bool isPlaceForTree = false;
     public float walkDelay = 1f;
 
-    private Vector2 finishBotPos;
+    private Vector3 finishBotPos;
     private Rigidbody2D rbody;
     private bool botCollision2floor = false;
 
@@ -38,7 +38,7 @@ public class BotController : MonoBehaviour
     {
         rbody = GetComponent<Rigidbody2D>();
         target = transform.position;
-        finishBotPos = new Vector2(2, 4);
+        finishBotPos = new Vector3(2, 4);
         //trigger.GetComponent<Transform>().position = new Vector3(0.5f, -0.25f);
         //gameObject.GetComponent<BotRotation>().botDirection;
     }
@@ -116,7 +116,7 @@ public class BotController : MonoBehaviour
         //if (botRay.collider.name == triggerRay.collider.name)
         //if(rays.Length < 2)
         if (botRenderer.GetComponent<SortingGroup>().sortingOrder < 2)
-            target = new Vector3(target.x + xStep, target.y + yStep);
+            target = new Vector3(target.x + xStep, target.y + yStep, target.z);
         //}
         //else
         //{
@@ -150,13 +150,13 @@ public class BotController : MonoBehaviour
         if (collision.tag == "Collider")
         {
             //Debug.Log("Collider entered");
-            target = new Vector2(target.x - xStep, target.y - yStep);
+            target = new Vector3(target.x - xStep, target.y - yStep);
         }
 
         if (collision.tag == "Green")
         {
             if (botRenderer.GetComponent<SortingGroup>().sortingOrder == 1)
-                target = new Vector2(target.x - xStep, target.y - yStep);
+                target = new Vector3(target.x - xStep, target.y - yStep);
         }
     }
 
