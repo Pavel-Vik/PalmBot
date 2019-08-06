@@ -92,7 +92,7 @@ AnimationClip:
     path: Body/Head
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 10
+  m_SampleRate: 90
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -141,7 +141,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.1
+    m_StopTime: 0.011111111
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

@@ -33,12 +33,12 @@ public class BotAnimation : MonoBehaviour
         }
         else if (botDirection == 2) // UpLeft
         {
-            botScale.x = Mathf.Abs(botScale.x);
+            botScale.x = Mathf.Abs(botScale.x) * -1;
             anim.SetBool("isBack", true);
         }
         else if (botDirection == 3) // UpRight
         {
-            botScale.x = Mathf.Abs(botScale.x) * -1;
+            botScale.x = Mathf.Abs(botScale.x);
             anim.SetBool("isBack", true);
         }
 

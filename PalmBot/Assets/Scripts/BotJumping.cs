@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class BotJumping : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class BotJumping : MonoBehaviour
 
     public Animator anim;
     public GameObject trigger;
-    public SpriteRenderer botRenderer;
+    public SortingGroup botRenderer;
 
     public string colideZone = "None";
 

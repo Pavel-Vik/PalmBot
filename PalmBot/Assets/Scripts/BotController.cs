@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class BotController : MonoBehaviour
 {   
@@ -8,7 +9,7 @@ public class BotController : MonoBehaviour
     public GameObject gameController;
     public GameObject tree;
     public Animator animator;
-    public SpriteRenderer botRenderer;
+    public GameObject botRenderer;
     public Transform trigger;
     public LineRenderer line;
 
@@ -114,7 +115,7 @@ public class BotController : MonoBehaviour
         //{
         //if (botRay.collider.name == triggerRay.collider.name)
         //if(rays.Length < 2)
-        if (botRenderer.sortingOrder < 2)
+        if (botRenderer.GetComponent<SortingGroup>().sortingOrder < 2)
             target = new Vector3(target.x + xStep, target.y + yStep);
         //}
         //else
@@ -154,7 +155,7 @@ public class BotController : MonoBehaviour
 
         if (collision.tag == "Green")
         {
-            if (botRenderer.sortingOrder == 1)
+            if (botRenderer.GetComponent<SortingGroup>().sortingOrder == 1)
                 target = new Vector2(target.x - xStep, target.y - yStep);
         }
     }
