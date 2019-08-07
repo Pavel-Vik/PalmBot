@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: GrayTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300002, guid: 4a20a131aca7f05479a13b7eb8a18812, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 21db13a7bdf0df044afa8b920777642b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
 
         firstBotPos = bot.GetComponent<Transform>().position;
         firstBotDirection = bot.GetComponent<BotRotation>().botDirection;
-        firstBotLayer = botGraphic.GetComponent<SortingGroup>().sortingOrder;
+        firstBotLayer = bot.GetComponentInChildren<Trigger>().floorToCheckForWalking;
 
         // Take other gameobject's scripts
         botRotationScript = bot.GetComponent<BotRotation>();
@@ -54,8 +54,8 @@ public class GameController : MonoBehaviour
         botGraphic.GetComponent<SortingGroup>().sortingOrder = firstBotLayer;
         StopAllCoroutines();
         botGraphic.GetComponent<Animator>().Rebind();
-        bot.GetComponent<BotJumping>().jumped = false;
         BotController.isJump = false;
+        bot.GetComponentInChildren<Trigger>().floorToCheckForWalking = firstBotLayer;
 
         plantTreeCommanded = false; // Reset command
 
