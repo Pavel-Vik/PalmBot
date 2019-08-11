@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RotateRight
   m_EditorClassIdentifier: 
   name: RotateRight
-  icon: {fileID: 21300000, guid: 98a4af8159bbcd245af2cdf358f3d4ba, type: 3}
+  icon: {fileID: 21300020, guid: 71e45171554baf04cba68504d82d7a96, type: 3}
   isDefaultCommand: 0

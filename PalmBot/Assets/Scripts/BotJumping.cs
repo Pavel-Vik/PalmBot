@@ -15,9 +15,9 @@ public class BotJumping : MonoBehaviour
     public float difBetweenLayersY = 0.2f;
     public float difBetweenLayersZ = 0.5f;
 
-    public Animator anim;
+    public float jumpChangeTargetDelay = 0.3f;
 
-    public string colideZone = "None";
+    public Animator anim;
 
 
     // Start is called before the first frame update
@@ -37,9 +37,17 @@ public class BotJumping : MonoBehaviour
         botDir = gameObject.GetComponent<BotRotation>().botDirection;
 
         anim.SetTrigger("Jumping");
-        Vector2 botStep = new Vector2(gameObject.GetComponent<BotController>().xStep, gameObject.GetComponent<BotController>().yStep);
+        StartCoroutine(DelayAndJump());
+    }
 
+
+    IEnumerator DelayAndJump()
+    {
+        yield return new WaitForSeconds(jumpChangeTargetDelay);
+
+        Vector2 botStep = new Vector2(gameObject.GetComponent<BotController>().xStep, gameObject.GetComponent<BotController>().yStep);
         Vector3 targ = gameObject.GetComponent<BotController>().target;
+
 
         // =========== Check trigger info for jumping UP
         if (GetComponentInChildren<Trigger>().isTileToJump == true)
@@ -48,9 +56,7 @@ public class BotJumping : MonoBehaviour
             canJump = false;
 
         // =========== Check trigger info for jumping DOWN
-        if (GetComponentInChildren<Trigger>().isTileToJump == false &&
-            GetComponentInChildren<Trigger>().isGroundAhead == false &&
-            GetComponentInChildren<Trigger>().isEdgeAhead == false)
+        if (GetComponentInChildren<Trigger>().isTileToJumpDown == true)
             canJumpDown = true;
         else
             canJumpDown = false;
@@ -66,18 +72,10 @@ public class BotJumping : MonoBehaviour
         // JUMPING DOWN
         if (canJumpDown == true)
         {
+            //One floor down
             gameObject.GetComponent<BotController>().target = new Vector3(targ.x + botStep.x, targ.y + botStep.y - difBetweenLayersY, targ.z - difBetweenLayersZ);
-            BotController.isJump = true;
+            BotController.isJumpDown = true;
+            gameObject.GetComponentInChildren<Trigger>().floorToCheckForWalking--;
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        colideZone = collision.name;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        colideZone = "None";
     }
 }

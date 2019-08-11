@@ -16,18 +16,24 @@ public class GameController : MonoBehaviour
     public GameObject bot;
     public GameObject botGraphic;
 
+    [Header("Finish Settings")]
+    public int greenTilesCount = 1;
+    public int plantedPalmsCount = 0;
+    public bool isLevelCompleted = false;
+
     // OTHER SRIPTS
     private BotRotation botRotationScript;
     private BotJumping botJumpingScript;
 
     public static bool isCommandDone = false;
-    public bool plantTreeCommanded = false; // Var for tree planting
+    private bool plantTreeCommanded = false; // Var for tree planting
     private Vector3 firstBotPos;
     private int firstBotDirection;
     private int firstBotLayer;
 
     private int finishedMainCommands = 0;
     private IEnumerator mainCoroutine;
+    private int palmId = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +62,11 @@ public class GameController : MonoBehaviour
         botGraphic.GetComponent<Animator>().Rebind();
         BotController.isJump = false;
         bot.GetComponentInChildren<Trigger>().floorToCheckForWalking = firstBotLayer;
+        gameObject.GetComponent<ManagerUI>().ShowNextLevelButton(false);
 
+        isLevelCompleted = false;
+        plantedPalmsCount = 0;
+        palmId = 0;
         plantTreeCommanded = false; // Reset command
 
             //Destroy all instantiated trees
@@ -156,16 +166,16 @@ public class GameController : MonoBehaviour
         }
 
         Debug.Log("finishedMainCommands = " + finishedMainCommands + "/ " + commandsPanel.commands.Count);
-        
-            if (finishedMainCommands < commandsPanel.commands.Count)
-            {
 
-                yield return new WaitForSeconds(delay);
-                //StartCoroutine(ReadCommands(commandsPanel.commands, true, finishedMainCommands));
-                mainCoroutine = ReadCommands(commandsPanel.commands, true, finishedMainCommands);
-                StartCoroutine(mainCoroutine);
+        if (finishedMainCommands < commandsPanel.commands.Count)
+        {
+
+            yield return new WaitForSeconds(delay);
+            //StartCoroutine(ReadCommands(commandsPanel.commands, true, finishedMainCommands));
+            mainCoroutine = ReadCommands(commandsPanel.commands, true, finishedMainCommands);
+            StartCoroutine(mainCoroutine);
         }
-            Debug.Log("All commands are finished");
+        Debug.Log("All commands are finished");
     }
     #endregion
 
@@ -181,7 +191,35 @@ public class GameController : MonoBehaviour
     public void Plant()
     {
         Debug.Log("Plant function");
-        if (BotController.isPlaceForTree == true)
-            Instantiate(tree, bot.transform.position, Quaternion.identity);
+
+        if (BotCollider.isGreenTile == true && BotCollider.isPalmHere == false)
+        {
+            GameObject newPalm;
+            newPalm = Instantiate(tree, bot.transform.position, Quaternion.identity);
+            plantedPalmsCount++;
+
+            newPalm.name = "Palm" + palmId.ToString();
+            palmId++;
+
+            // Last palm planted
+            if (plantedPalmsCount == greenTilesCount)
+                isLevelCompleted = true;
+            else
+                isLevelCompleted = false;
+
+            // WIN CHECKING
+            if (isLevelCompleted == true)
+            {
+                gameObject.GetComponent<ManagerUI>().ShowNextLevelButton(true);
+                StopAllCoroutines();
+            }
+        }
+
+        else if (BotCollider.isGreenTile == true && BotCollider.isPalmHere == true)
+        {
+            GameObject palm = GameObject.Find(BotCollider.palmNameCollidingWith);
+            Destroy(palm);
+            plantedPalmsCount--;
+        }
     }
 }

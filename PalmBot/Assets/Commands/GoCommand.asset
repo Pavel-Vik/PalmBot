@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GoCommand
   m_EditorClassIdentifier: 
   name: Go
-  icon: {fileID: 21300000, guid: c5c867e9976dc5d4a8803e01578752f5, type: 3}
+  icon: {fileID: 21300016, guid: 71e45171554baf04cba68504d82d7a96, type: 3}
   isDefaultCommand: 0

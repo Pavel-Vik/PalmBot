@@ -21,11 +21,11 @@ public class BotController : MonoBehaviour
     //[HideInInspector]
     public Vector3 target;
     public static bool isJump = false;
+    public static bool isJumpDown = false;
 
     [Space]
         // Boolean vars
     public bool isDone = false;
-    public static bool isPlaceForTree = false;
     public float walkDelay = 1f;
 
     private Vector3 finishBotPos;
@@ -49,14 +49,19 @@ public class BotController : MonoBehaviour
         {
             if (isJump)
                 botSpeed = jumpSpeed;
+            else if (isJumpDown)
+                botSpeed = jumpSpeed;
             else
                 botSpeed = movementSpeed;
+
             
             //animator.SetBool("isWalking", true);
             transform.position = Vector3.MoveTowards(transform.position, target, botSpeed * Time.deltaTime);
         }
         else
         {
+            isJump = false;
+            isJumpDown = false;
             animator.SetBool("isWalking", false);
             GameController.isCommandDone = true;
         }
@@ -76,28 +81,6 @@ public class BotController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Green")
-        {
-            Debug.Log("Green Zone entered");
-            isPlaceForTree = true;
-            //if (gameController.GetComponent<GameController>().plantTreeCommanded == true)
-                //Instantiate(tree);
-        }
-
-        if (collision.tag == "Green")
-        {
-            //if (botRenderer.GetComponent<SortingGroup>().sortingOrder == 1)
-            //    target = new Vector3(target.x - xStep, target.y - yStep);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Green")
-            isPlaceForTree = false;
-    }
 
     IEnumerator Delay()
     {

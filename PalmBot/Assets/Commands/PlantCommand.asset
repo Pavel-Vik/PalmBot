@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlantCommand
   m_EditorClassIdentifier: 
   name: Plant
-  icon: {fileID: 21300000, guid: cc08ccd1cf04a3d43b8d437d087cfc02, type: 3}
+  icon: {fileID: 21300014, guid: 71e45171554baf04cba68504d82d7a96, type: 3}
   isDefaultCommand: 0

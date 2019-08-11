@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Jump
   m_EditorClassIdentifier: 
   name: Jump
-  icon: {fileID: 21300000, guid: fdf81e4514a3ee343842aa1421113184, type: 3}
+  icon: {fileID: 21300022, guid: 71e45171554baf04cba68504d82d7a96, type: 3}
   isDefaultCommand: 0
