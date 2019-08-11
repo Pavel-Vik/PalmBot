@@ -16,10 +16,13 @@ public class GameController : MonoBehaviour
     public GameObject bot;
     public GameObject botGraphic;
 
-    [Header("Finish Settings")]
-    public int greenTilesCount = 1;
+    [Header("Finish Info")]
     public int plantedPalmsCount = 0;
     public bool isLevelCompleted = false;
+
+    [Header("LEVEL SETTINGS")]
+    public int levelSectionID = 1;
+    public int greenTilesCount = 1;
 
     // OTHER SRIPTS
     private BotRotation botRotationScript;

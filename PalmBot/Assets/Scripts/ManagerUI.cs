@@ -23,8 +23,8 @@ public class ManagerUI : MonoBehaviour
         nextLevelButton.SetActive(showing);
     }
 
-    public void OnBackButtonPressed(int curentSectionID)
+    public void OnBackButtonPressed()
     {
-        SceneManager.LoadScene("SelectLevel_" + curentSectionID);
+        SceneManager.LoadScene("SelectLevel_" + gameObject.GetComponent<GameController>().levelSectionID);
     }
 }

@@ -63,7 +63,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -74,7 +74,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 512
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -85,7 +85,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: iPhone
-    maxTextureSize: 512
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -96,7 +96,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Android
-    maxTextureSize: 512
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -107,7 +107,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: WebGL
-    maxTextureSize: 512
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -123,10 +123,10 @@ TextureImporter:
       name: Tiles_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 323
-        height: 258
+        x: 107
+        y: 20
+        width: 325
+        height: 265
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,7 +134,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57f0c76950bb0ce4e9fda07da87e9b1b
+      spriteID: bf879ad95db0da9469cdadfa06824569
       vertices: []
       indices: 
       edges: []
@@ -143,10 +143,10 @@ TextureImporter:
       name: Tiles_1
       rect:
         serializedVersion: 2
-        x: 357
-        y: 0
+        x: 468
+        y: 20
         width: 325
-        height: 258
+        height: 265
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f6a43d4cdb1b09489d7d1763a858b8a
+      spriteID: 5006ad19e02587a40a05f4c86dab7756
       vertices: []
       indices: 
       edges: []
@@ -163,18 +163,18 @@ TextureImporter:
       name: Tiles_2
       rect:
         serializedVersion: 2
-        x: 701
-        y: 73
-        width: 318
-        height: 184
+        x: 805
+        y: 123
+        width: 331
+        height: 162
       alignment: 9
-      pivot: {x: 0.50219417, y: 0.30747455}
+      pivot: {x: 0.5016131, y: 0.18962069}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f51616eb25900940b6400b55a35e7d9
+      spriteID: 951c4f0237294784c9b0234f2f7bf5bd
       vertices: []
       indices: 
       edges: []

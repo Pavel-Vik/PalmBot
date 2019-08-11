@@ -342,7 +342,7 @@ SortingGroup:
   m_GameObject: {fileID: 999810449}
   m_Enabled: 1
   m_SortingLayerID: -992109101
-  m_SortingLayer: -1
+  m_SortingLayer: 2
   m_SortingOrder: 1
 --- !u!95 &999810451
 Animator:
@@ -948,8 +948,8 @@ MonoBehaviour:
   animator: {fileID: 999810451}
   botRenderer: {fileID: 999810449}
   movementSpeed: 1.2
-  jumpSpeed: 2.7
-  xStep: 0.308
+  jumpSpeed: 4
+  xStep: 0.305
   yStep: 0.145
   target: {x: 0, y: 0, z: 0}
   isDone: 0
@@ -966,7 +966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec711ad2fc12f2643b3a5293cdcbcdb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botDirection: 0
+  botDirection: 2
 --- !u!114 &5542169528915293666
 MonoBehaviour:
   m_ObjectHideFlags: 0
