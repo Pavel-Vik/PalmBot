@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Buttons functions for level UI
+/// </summary>
+
 public class ManagerUI : MonoBehaviour
 {
     public GameObject nextLevelButton;

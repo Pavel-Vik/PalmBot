@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This script is for checking colliding with Green Tile and a Palm
+/// </summary>
+
 public class BotCollider : MonoBehaviour
 {
     public string colide = null;

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Buttons functions for menus
+/// </summary>
+
 public class LevelManager : MonoBehaviour
 {
     public int levelsSectionID;

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This script is for showing bot direction and set information into the Animator
+/// </summary>
+
 public class BotAnimation : MonoBehaviour
 {
     private int botDirection;

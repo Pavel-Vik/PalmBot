@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+/// <summary>
+/// This script is for bot movement and setting walk animation if it is not a jump
+/// </summary>
+
 public class BotController : MonoBehaviour
 {   
     [Header("Game Objects")]

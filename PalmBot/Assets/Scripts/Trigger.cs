@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Checking what tile is in front of the bot
+/// </summary>
+
 public class Trigger : MonoBehaviour
 {
     public bool isGroundAhead = true;

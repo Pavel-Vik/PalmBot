@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// How this system work is explained here https://www.youtube.com/watch?v=w6_fetj9PIw
+/// </summary>
+
 public class CommandPanel : MonoBehaviour
 {
     #region Singelton

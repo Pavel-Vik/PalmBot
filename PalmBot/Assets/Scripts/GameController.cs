@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// This sript is for level settings and commands reading when Play is pressed
+/// + Planting and winning
+/// + Retry and Play buttons
+/// </summary>
+
 public class GameController : MonoBehaviour
 {
     CommandPanel commandsPanel; // Our current panel
